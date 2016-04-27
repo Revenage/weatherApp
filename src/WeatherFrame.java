@@ -22,7 +22,7 @@ public class WeatherFrame extends JFrame {
    // BufferedImage myPicture = ImageIO.read(new File(""));
    // JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 
-    
+
 
 
     WeatherFrame() {
