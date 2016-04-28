@@ -1,11 +1,8 @@
-/**
+package ui; /**
  * Created by revenage on 4/25/16.
  */
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
 public class WeatherFrame extends JFrame {
     JPanel settingsPanel = new JPanel(new GridLayout(1,3));
@@ -25,7 +22,7 @@ public class WeatherFrame extends JFrame {
 
 
 
-    WeatherFrame() {
+    public WeatherFrame() {
         setBounds(500, 500, 500, 500);
         setLayout(new BorderLayout());
         add(settingsPanel,BorderLayout.NORTH);
