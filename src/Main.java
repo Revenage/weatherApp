@@ -1,8 +1,8 @@
 import org.json.simple.parser.ParseException;
 import services.WeatherData;
 import ui.WeatherFrame;
-
 import java.io.IOException;
+
 
 public class Main {
 
