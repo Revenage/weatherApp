@@ -3,7 +3,7 @@ package model;
 /**
  * Created by revenage on 5/2/16.
  */
-public class WeatherModel {
+public class DayWeather {
     int dayOfMonth;
     double dayTemp;
     double nigthTemp;
@@ -17,7 +17,7 @@ public class WeatherModel {
     long windDirection;
     long cloudiness;
 
-    public WeatherModel(int dayOfMonth, double dayTemp, double nigthTemp, double morningTemp, double eveningTemp, double pressure, long humidity, String wether, String typeOfWether, double windSpeed, long windDirection, long cloudiness) {
+    public DayWeather(int dayOfMonth, double dayTemp, double nigthTemp, double morningTemp, double eveningTemp, double pressure, long humidity, String wether, String typeOfWether, double windSpeed, long windDirection, long cloudiness) {
         this.dayOfMonth = dayOfMonth;
         this.dayTemp = dayTemp;
         this.nigthTemp = nigthTemp;
@@ -30,5 +30,13 @@ public class WeatherModel {
         this.windSpeed = windSpeed;
         this.windDirection = windDirection;
         this.cloudiness = cloudiness;
+    }
+
+    public double getDayTemp() {
+        return dayTemp;
+    }
+
+    public double getMonthDay() {
+        return dayOfMonth;
     }
 };

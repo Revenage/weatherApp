@@ -1,7 +1,8 @@
 package services;
 
-import model.WeatherModel;
+import model.DayWeather;
 
+// try gson lib
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,6 +15,7 @@ import java.util.Calendar;
 /**
  * Created by revenage on 4/28/16.
  */
+
 public class WeatherData {
 
     public String respond;
@@ -23,7 +25,7 @@ public class WeatherData {
         this.respond = respond;
     }
 
-    public ArrayList getData() throws ParseException, IOException {
+    public ArrayList<DayWeather> getDays() throws ParseException, IOException {
         String respondJSON;
         respondJSON = respond;
 
@@ -31,7 +33,7 @@ public class WeatherData {
         JSONObject jsonObj = (JSONObject) obj;
 
         JSONArray weekList = (JSONArray) jsonObj.get("list");
-        ArrayList<WeatherModel> weekData = new ArrayList<WeatherModel>();
+        ArrayList<DayWeather> weekData = new ArrayList<>();
 
         for(int i = 0 ; i < weekList.size(); i++) {
             JSONObject day = (JSONObject) weekList.get(i);
@@ -46,10 +48,10 @@ public class WeatherData {
             JSONObject tempData = (JSONObject) day.get("temp");
             int dayNum = dayDate.get(Calendar.DAY_OF_MONTH);
 
-            double dayTemp = (Double) tempData.get("day");
-            double nightTemp = (Double) tempData.get("night");
-            double eveningTemp = (Double) tempData.get("eve");
-            double morningTemp = (Double) tempData.get("morn");
+            double dayTemp = getValue(tempData, "day");
+            double nightTemp = getValue(tempData, "night");
+            double eveningTemp = getValue(tempData, "eve");
+            double morningTemp = getValue(tempData, "morn");
 
             double pressure = (Double) day.get("pressure");
             long humidity = (long) day.get("humidity");
@@ -59,12 +61,22 @@ public class WeatherData {
             String weather = (String) dayWeatherObj.get("description");
             String typeWeather = (String) dayWeatherObj.get("main");
 
-            double windSpeed = (Double) day.get("speed");
+            double windSpeed = getValue(day, "speed");
             long deg = (Long) day.get("deg");
             long clouds = (Long) day.get("clouds");
 
-            weekData.add(new WeatherModel(dayNum, dayTemp, nightTemp, morningTemp, eveningTemp, pressure, humidity, weather, typeWeather, windSpeed, deg, clouds));
+            weekData.add(new DayWeather(dayNum, dayTemp, nightTemp, morningTemp, eveningTemp, pressure, humidity, weather, typeWeather, windSpeed, deg, clouds));
         }
         return weekData;
+    }
+
+    private double getValue(JSONObject data, String name) {
+        Object result = data.get(name);
+        if (result instanceof Double)
+            return (Double) result;
+        if (result instanceof Long)
+            return (Long) result;
+
+        throw new IllegalArgumentException("tampData malformed");
     }
 }
