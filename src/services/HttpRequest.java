@@ -6,15 +6,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpGetData {
+public class HttpRequest {
 
-    String url;
+    String url = "http://api.openweathermap.org/data/2.5/forecast/daily?id=706483&units=metric&cnt=7&appid=27f693b51368734b5e94c3fd9972b4db";
+
     // HTTP GET request
-    public HttpGetData(String url) {
+    /*public HttpRequest(String url) {
         this.url = url;
-    }
+    }*/
 
-    public String getData() throws IOException {
+    public WeatherData getData() throws IOException {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -43,6 +44,7 @@ public class HttpGetData {
         in.close();
         //print result
         //System.out.println(response.toString());
-        return response.toString();
+
+        return new WeatherData(response.toString());
     }
 }
