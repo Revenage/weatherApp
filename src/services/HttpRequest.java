@@ -10,11 +10,6 @@ public class HttpRequest {
 
     String url = "http://api.openweathermap.org/data/2.5/forecast/daily?id=706483&units=metric&cnt=7&appid=27f693b51368734b5e94c3fd9972b4db";
 
-    // HTTP GET request
-    /*public HttpRequest(String url) {
-        this.url = url;
-    }*/
-
     public WeatherData getData() throws IOException {
 
         URL obj = new URL(url);
@@ -27,9 +22,6 @@ public class HttpRequest {
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
 
         int responseCode = con.getResponseCode();
-
-        //System.out.println("\nSending 'GET' request to URL : " + url);
-        //System.out.println("Response Code : " + responseCode);
 
         String inputLine;
         StringBuffer response = new StringBuffer();
