@@ -53,7 +53,7 @@ public class WeatherData {
             double eveningTemp = getValue(tempData, "eve");
             double morningTemp = getValue(tempData, "morn");
 
-            double pressure = (Double) day.get("pressure");
+            double pressure = getValue(day, "pressure");
             long humidity = (long) day.get("humidity");
 
             JSONArray dayWeather = (JSONArray) day.get("weather");

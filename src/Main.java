@@ -13,7 +13,11 @@ public class Main {
         HttpRequest respond = new HttpRequest();
         WeatherData weatherData = respond.getData();
         ArrayList<DayWeather> days = weatherData.getDays();
-
+        /*for (DayWeather dayData : days) {
+            System.out.print(dayData.getDayOfMonth());
+            System.out.print(" ");
+            System.out.println(dayData.getDayTemp());
+        }*/
         new WeatherFrame(days);
 
     }
