@@ -9,16 +9,12 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws IOException, ParseException {
-        new WeatherFrame();
 
-        /*HttpRequest respond = new HttpRequest();
+        HttpRequest respond = new HttpRequest();
         WeatherData weatherData = respond.getData();
         ArrayList<DayWeather> days = weatherData.getDays();
-        for (DayWeather dayData : days) {
-            System.out.print(dayData.getDayOfMonth());
-            System.out.print(" ");
-            System.out.println(dayData.getDayTemp());
-        }*/
+
+        new WeatherFrame(days);
 
     }
 }

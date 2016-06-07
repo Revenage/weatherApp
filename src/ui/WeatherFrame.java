@@ -1,8 +1,13 @@
 package ui; /**
  * Created by revenage on 4/25/16.
  */
+import model.DayWeather;
+
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.util.ArrayList;
 
 import static javax.swing.SwingConstants.NORTH;
 
@@ -13,33 +18,48 @@ public class WeatherFrame extends JFrame {
 
     JLabel todayDate = new JLabel("Today: 12 May 2016");
     JLabel todayTemp = new JLabel("17C");
-
-    JLabel anyLabel = new JLabel("666");
    // BufferedImage myPicture = ImageIO.read(new File(""));
    // JLabel picLabel = new JLabel(new ImageIcon(myPicture));
 
-    String[] columnNames = {"First Name",
-            "Last Name",
-            "Sport",
-            "# of Years",
-            "Vegetarian"};
+   public class MyTableModel extends AbstractTableModel {
 
-    Object[][] data = {
-            {"Kathy", "Smith",
-                    "Snowboarding", new Integer(5), new Boolean(false)},
-            {"John", "Doe",
-                    "Rowing", new Integer(3), new Boolean(true)},
-            {"Sue", "Black",
-                    "Knitting", new Integer(2), new Boolean(false)},
-            {"Jane", "White",
-                    "Speed reading", new Integer(20), new Boolean(true)},
-            {"Joe", "Brown",
-                    "Pool", new Integer(10), new Boolean(false)}
-    };
+       public MyTableModel(ArrayList<DayWeather> days) {
+           super();
+           this.days = days;
+       }
 
-    JTable table = new JTable(data, columnNames);
+       @Override
+       public int getRowCount() {
+           return 5;
+       }
+       @Override
+       public int getColumnCount() {
+           return 7;
+       }
 
-    public WeatherFrame() {
+       @Override
+       public Object getValueAt(int rowIndex, int columnIndex) {
+           return days;
+       }
+
+
+       /*ArrayList<DayWeather> days = weatherData.getDays();
+        for (DayWeather dayData : days) {
+            System.out.print(dayData.getDayOfMonth());
+            System.out.print(" ");
+            System.out.println(dayData.getDayTemp());
+        }*/
+       /*@Override
+       public Object getValueAt(int r, int c) {
+           return r * c;
+       }*/
+   }
+
+    public WeatherFrame(ArrayList<DayWeather> data) {
+
+        TableModel model = new MyTableModel(data);
+        JTable table = new JTable(model);
+
         setBounds(500, 500, 500, 500);
         setLayout(new BorderLayout());
         //add(settingsPanel,BorderLayout.NORTH);
