@@ -24,8 +24,9 @@ public class WeatherFrame extends JFrame {
    public class MyTableModel extends AbstractTableModel {
 
        public MyTableModel(ArrayList<DayWeather> days) {
-           super();
-           this.days = days;
+
+
+
        }
 
        @Override
@@ -39,7 +40,17 @@ public class WeatherFrame extends JFrame {
 
        @Override
        public Object getValueAt(int rowIndex, int columnIndex) {
-           return days;
+
+           switch (rowIndex) {
+               case 0:
+                   return days.get(rowIndex).getDayOfMonth();
+               case 1:
+                   return days.get(rowIndex).getDayOfMonth();
+               case 2:
+                   return days.get(rowIndex).getDayOfMonth();
+               default:
+                   return "";
+           }
        }
 
 
