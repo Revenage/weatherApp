@@ -5,6 +5,7 @@ import model.DayWeather;
 
 import javax.swing.*;
 
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import java.awt.*;
@@ -16,20 +17,31 @@ public class WeatherFrame extends JFrame {
     JPanel weekdaysPanel = new JPanel();
 
     public WeatherFrame(ArrayList<DayWeather> days) {
-        TableModel model = new MyTableModel(days);
-        JTable table = new JTable(model);
-
-        JTableHeader header = table.getTableHeader();
-        add(header, BorderLayout.NORTH);
-        add(table, BorderLayout.CENTER);
-
         JLabel todayDate = new JLabel("Today: 12 May 2016");
         JLabel todayTemp = new JLabel("17C");
+
+        TableModel model = new MyTableModel(days);
+        JTable table = new JTable(model);
+        JTableHeader header = table.getTableHeader();
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        table.setDefaultRenderer(String.class, centerRenderer);
+
+        table.setBackground(Color.blue);
+        table.setForeground(Color.white);
+        table.setRowHeight(30);
+        table.setFont(new Font("Arial", Font.BOLD, 12));
+        //table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        add(header, BorderLayout.NORTH);
+        add(table, BorderLayout.CENTER);
 
         todayPanel.add(todayDate);
         todayPanel.add(todayTemp);
 
         setBounds(600, 600, 600, 600);
+
         setLayout(new BorderLayout());
 
         add(todayPanel,BorderLayout.CENTER);

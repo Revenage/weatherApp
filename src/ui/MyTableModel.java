@@ -16,6 +16,8 @@ public class MyTableModel extends AbstractTableModel {
         this.days = days;
     }
 
+
+
     @Override
     public int getRowCount() {
         return days.size();
